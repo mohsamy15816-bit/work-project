@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#071a38">
+  <title data-i18n="pageTitle">مغامرة الرياضيات</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="brand"><div class="mark" aria-hidden="true">∑</div><div><strong data-i18n="brand">مختبر الرياضيات</strong><small data-i18n="tagline">نتعلّم باللعب والتقنية</small></div></div>
+      <div class="header-actions">
+        <label class="language-label" for="language-select" data-i18n="languageLabel">اللغة</label>
+        <select id="language-select" class="language-select" aria-label="اختر اللغة" data-aria="languageLabel">
+          <option value="ar">العربية</option>
+          <option value="en">English</option>
+        </select>
+        <div class="tag" data-i18n="headerTag">✦ مغامرة في عالم الرياضيات</div>
+      </div>
+    </header>
+    <main>
+      <div class="eyebrow" data-i18n="eyebrow">◈ لعبة تعليمية تفاعلية</div>
+      <h1><span data-i18n="title">مغامرة الرياضيات</span></h1>
+      <p class="intro" data-i18n="intro">اختر صفك الدراسي وموضوع التحدّي، ثم اجمع النقاط واكتشف الحلول خطوة بخطوة. تحتوي كل مرحلة على تدريبات مناسبة للصف السادس أو السابع أو الثامن.</p>
+      <div class="math-art" aria-hidden="true"><span>1/2 + 1/4</span><span>x : y</span><span>x + 5 = 12</span><span data-i18n="areaRectangle">مساحة المستطيل</span><span>(−3, 2)</span></div>
+      <section class="screen active" id="start">
+        <label class="name-field" for="grade-select" data-i18n="gradeLabel">اختر الصف الدراسي</label>
+        <select class="name-input" id="grade-select">
+          <option value="6" data-grade="6">الصف السادس</option>
+          <option value="7" data-grade="7">الصف السابع</option>
+          <option value="8" data-grade="8">الصف الثامن</option>
+        </select>
+        <p class="grade-description" id="grade-description" aria-live="polite"></p>
+        <h2 data-i18n="topicHeading">اختر موضوع التحدّي</h2>
+        <label class="name-field" for="player-name"><span data-i18n="playerName">اسم اللاعب</span> <span data-i18n="optional">(اختياري)</span></label>
+        <input id="player-name" class="name-input" type="text" maxlength="24" autocomplete="given-name" placeholder="اكتب اسمك هنا" data-placeholder="namePlaceholder">
+        <label class="name-field" for="question-count" data-i18n="questionCount">عدد الأسئلة</label>
+        <select class="name-input" id="question-count">
+          <option value="8" data-count="8">8 أسئلة — جولة سريعة</option>
+          <option value="12" data-count="12">12 سؤالاً — جولة عادية</option>
+          <option value="16" data-count="16">16 سؤالاً — تحدّي طويل</option>
+        </select>
+        <p class="record-preview" id="record-preview" aria-live="polite"></p>
+        <div class="levels topics" id="topic-options" role="group" aria-label="موضوعات الرياضيات" data-aria="topicsLabel"></div>
+        <button class="primary" id="start-button" data-i18n="startButton">ابدأ التحدّي ←</button>
+      </section>
+      <section class="screen" id="game" aria-label="سؤال الرياضيات" data-aria="gameLabel">
+        <div class="game-top">
+          <span id="count"></span>
+          <span class="game-stats"><span class="score">⭐ <span id="score">0</span> <span data-i18n="points">نقطة</span></span><span class="streak">🔥 <span data-i18n="streak">سلسلة</span> <span id="streak">0</span></span><span class="timer">⏱ <span id="timer">0:00</span></span></span>
+        </div>
+        <div class="progress" id="progress" role="progressbar" aria-label="التقدم في التحدي" data-aria="progressLabel" aria-valuemin="0" aria-valuemax="8" aria-valuenow="0"><div id="fill"></div></div>
+        <div class="card">
+          <div class="question-label" id="question-label">اختر الإجابة الصحيحة</div>
+          <div class="question" id="question" aria-live="polite"></div>
+          <button class="hint-button" id="hint-button" type="button" data-i18n="hintButton">💡 تلميح</button>
+          <p class="hint-text" id="hint-text" hidden></p>
+          <div class="answers" id="answers"></div>
+          <p class="feedback" id="feedback" aria-live="polite"></p>
+          <p class="explanation" id="explanation" aria-live="polite" hidden></p>
+          <div class="game-actions">
+            <button class="secondary" id="exit-button" type="button" data-i18n="exitButton">خروج</button>
+            <button class="primary" id="next" hidden>السؤال التالي ←</button>
+          </div>
+        </div>
+      </section>
+      <section class="screen result" id="result" aria-live="polite">
+        <div class="badge" id="badge">🏆</div><h2 id="result-title"></h2><p id="message"></p><p class="final" id="final"></p>
+        <p class="record" id="record-result"></p>
+        <article class="certificate" id="certificate" aria-label="شهادة إتمام التحدّي" data-aria="certificateLabel">
+          <div class="certificate-inner">
+            <div class="certificate-mark" aria-hidden="true">✦</div>
+            <p class="certificate-kicker" data-i18n="certificateTitle">شهادة إنجاز</p>
+            <h3 data-i18n="certificateAdventure">مغامرة الرياضيات</h3>
+            <p class="certificate-intro" data-i18n="certificateAwarded">تُمنح هذه الشهادة إلى</p>
+            <p class="certificate-name" id="certificate-name"></p>
+            <p class="certificate-description" data-i18n="certificateDescription">لإتمام تحدّي الرياضيات بنجاح</p>
+            <div class="certificate-details">
+              <span id="certificate-grade"></span>
+              <span id="certificate-topic"></span>
+              <span id="certificate-score"></span>
+            </div>
+            <p class="certificate-date" id="certificate-date"></p>
+          </div>
+        </article>
+        <div class="certificate-actions">
+          <button class="secondary" id="copy-certificate" type="button" data-i18n="copyCertificate">انسخ نص الشهادة</button>
+          <button class="secondary" id="download-certificate" type="button" data-i18n="downloadCertificate">تنزيل شهادة PDF</button>
+        </div>
+        <section class="missed-review" id="missed-review" hidden aria-labelledby="missed-title">
+          <h3 id="missed-title" data-i18n="missedTitle">مراجعة الأسئلة التي تحتاج إلى تدريب</h3>
+          <ol id="missed-list"></ol>
+        </section>
+        <p class="share-status" id="share-status" aria-live="polite"></p>
+        <div class="result-actions"><button class="secondary" id="share-result" type="button" data-i18n="shareResult">انسخ النتيجة</button>
+        <button class="primary" id="restart" data-i18n="restart">العب من جديد ↻</button>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <span data-i18n="footer">تحدّي وحدات الرياضيات — خطوة بخطوة نحو التفوّق ✨</span>
+      <small class="author-credit" data-i18n="authorCredit">محمد صلاح</small>
+    </footer>
+  </div>
+  <script src="script.js" defer></script>
+</body>
+</html>
